@@ -1,5 +1,5 @@
 // GANTI DENGAN NOMOR WHATSAPP ANDA
-const ADMIN_WHATSAPP_NUMBER = '6285785944924';
+const ADMIN_WHATSAPP_NUMBER = '6285602095677';
 
 // Page Navigation
 function showPage(pageId) {
