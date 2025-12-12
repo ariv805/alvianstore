@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvian Store - Solusi Digital Terpercaya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link ke file CSS kita -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <i class="fas fa-info-circle me-2"></i>
+        Pesan melalui WhatsApp untuk melakukan pemesanan, kami akan proses secepatnya!
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">
+                <i class="fas fa-store me-2"></i>Alvian Store
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('home')">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('products')">Produk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('services')">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('how-it-works')">Cara Kerja</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Selamat Datang di Alvian Store</h1>
+                <p class="hero-subtitle">Solusi lengkap untuk kebutuhan digital Anda. Panel Pterodactyl berkualitas tinggi, nomor virtual, dan bot WhatsApp profesional.</p>
+                <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-light btn-lg me-3" onclick="showPage('products')">
+                        <i class="fas fa-shopping-cart me-2"></i>Lihat Produk
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-lg" onclick="showPage('how-it-works')">
+                        <i class="fas fa-question-circle me-2"></i>Cara Kerja
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Mengapa Memilih Kami?</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <div class="product-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <h3>Performa Tinggi</h3>
+                            <p>Server dengan spesifikasi VPS R16 C8 untuk performa maksimal dan anti delay 100%</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <div class="product-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Keamanan Terjamin</h3>
+                            <p>Proteksi DDOS dan anti delete panel untuk keamanan data Anda</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <div class="product-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3>Support 24/7</h3>
+                            <p>Tim support siap membantu Anda melalui Telegram untuk konsultasi dan troubleshooting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Products Page -->
+    <div id="products" class="page">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Produk Kami</h2>
+                
+                <!-- Panel Pterodactyl -->
+                <div class="mb-5">
+                    <h3 class="mb-4">Panel Pterodactyl</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Ram 1GB</h5>
+                                        <p class="text-muted mb-0">Disk 1GB | CPU 70%</p>
+                                    </div>
+                                    <div class="panel-price">Rp 1.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Ram 1GB" data-price="1000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Ram 2GB</h5>
+                                        <p class="text-muted mb-0">Disk 2GB | CPU 90%</p>
+                                    </div>
+                                    <div class="panel-price">Rp 2.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Ram 2GB" data-price="2000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Ram 4GB</h5>
+                                        <p class="text-muted mb-0">Disk 4GB | CPU 170%</p>
+                                    </div>
+                                    <div class="panel-price">Rp 4.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Ram 4GB" data-price="4000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Ram 6GB</h5>
+                                        <p class="text-muted mb-0">Disk 6GB | CPU 260%</p>
+                                    </div>
+                                    <div class="panel-price">Rp 5.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Ram 6GB" data-price="5000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Ram 8GB</h5>
+                                        <p class="text-muted mb-0">Disk 8GB | CPU 380%</p>
+                                    </div>
+                                    <div class="panel-price">Rp 7.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Ram 8GB" data-price="7000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Ram 10GB</h5>
+                                        <p class="text-muted mb-0">Disk 10GB | CPU 460%</p>
+                                    </div>
+                                    <div class="panel-price">Rp 10.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Ram 10GB" data-price="10000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="panel-option">
+                                <div class="panel-specs">
+                                    <div>
+                                        <h5>Panel Unlimited</h5>
+                                        <p class="text-muted mb-0">Disk Unlimited | CPU Unlimited</p>
+                                    </div>
+                                    <div class="panel-price">Rp 12.000</div>
+                                </div>
+                                <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Panel Unlimited" data-price="12000">
+                                    <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Benefits -->
+                    <div class="mt-5">
+                        <h4 class="mb-3">Benefit Panel Pterodactyl</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="benefit-item">
+                                    <i class="fas fa-check-circle benefit-icon"></i>
+                                    <span>Anti delay 100%</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-check-circle benefit-icon"></i>
+                                    <span>Anti DDOS</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-check-circle benefit-icon"></i>
+                                    <span>Anti delete panel</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="benefit-item">
+                                    <i class="fas fa-check-circle benefit-icon"></i>
+                                    <span>Admin hanya pemilik</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-check-circle benefit-icon"></i>
+                                    <span>Konsultasi gratis jika ada masalah</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-check-circle benefit-icon"></i>
+                                    <span>Spek VPS R16 C8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Products -->
+                <div class="row mt-5">
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="product-title">Nokos Indonesia</h3>
+                            <p class="product-description">Nomor virtual Indonesia yang dapat digunakan untuk verifikasi berbagai platform</p>
+                            <div class="product-price">Rp 6.000</div>
+                            <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Nokos Indonesia" data-price="6000">
+                                <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3 class="product-title">Script Bot WhatsApp</h3>
+                            <p class="product-description">Script bot WhatsApp dengan fitur lengkap untuk kebutuhan bisnis Anda</p>
+                            <div class="product-price">Rp 15.000</div>
+                            <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Script Bot WhatsApp" data-price="15000">
+                                <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Layanan Kami</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3 class="product-title">Jasa Perbaikan Bot</h3>
+                            <p class="product-description">Tim ahli kami siap memperbaiki bot WhatsApp yang error atau tidak berfungsi dengan baik</p>
+                            <div class="product-price">Mulai Rp 25.000</div>
+                            <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Jasa Perbaikan Bot" data-price="25000">
+                                <i class="fas fa-shopping-cart me-2"></i>Pesan Sekarang
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <h3 class="product-title">Jasa Rename Bot</h3>
+                            <p class="product-description">Ubah nama dan tampilan bot WhatsApp sesuai dengan keinginan Anda</p>
+                            <div class="product-price">Mulai Rp 15.000</div>
+                            <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Jasa Rename Bot" data-price="15000">
+                                <i class="fas fa-shopping-cart me-2"></i>Pesan Sekarang
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3 class="product-title">Pembuatan Bot Custom</h3>
+                            <p class="product-description">Buat bot WhatsApp custom sesuai dengan kebutuhan bisnis Anda</p>
+                            <div class="product-price">Mulai Rp 50.000</div>
+                            <button class="btn btn-primary-custom w-100" onclick="showOrderModal(this)" data-product="Pembuatan Bot Custom" data-price="50000">
+                                <i class="fas fa-shopping-cart me-2"></i>Pesan Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="product-card">
+                            <h4 class="mb-3">Butuh Bantuan?</h4>
+                            <p>Hubungi kami melalui WhatsApp atau Telegram untuk konsultasi lebih lanjut</p>
+                            <div class="d-flex mt-4">
+                                <a href="https://wa.me/628123456789" class="btn btn-success me-3">
+                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                </a>
+                                <a href="https://t.me/alvianadmin" class="btn btn-primary">
+                                    <i class="fab fa-telegram me-2"></i>Telegram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-card">
+                            <h4 class="mb-3">Jam Operasional</h4>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Senin - Jumat</span>
+                                <span>09:00 - 21:00 WIB</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Sabtu</span>
+                                <span>10:00 - 18:00 WIB</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Minggu</span>
+                                <span>10:00 - 15:00 WIB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- How It Works Page -->
+    <div id="how-it-works" class="page">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Cara Kerja Website</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>Pilih Produk</h4>
+                            <p>Pilih produk atau layanan yang Anda inginkan dari katalog kami</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>Isi Form & Konfirmasi</h4>
+                            <p>Isi data yang diperlukan (seperti username panel) dan pilih metode pembayaran</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h4>Kirim ke WhatsApp</h4>
+                            <p>Klik tombol untuk mengirim pesan pemesanan otomatis ke WhatsApp kami</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        <div class="product-card">
+                            <h4 class="mb-3">Panduan Lengkap</h4>
+                            <ol>
+                                <li><strong>Pilih Produk:</strong> Telusuri katalog produk kami dan klik "Beli Sekarang" pada produk yang Anda inginkan.</li>
+                                <li><strong>Isi Formulir:</strong> Akan muncul formulir sederhana. Jika Anda membeli panel, isi username dan password yang Anda inginkan. Untuk produk lain, formulir bisa dilewati.</li>
+                                <li><strong>Pilih Pembayaran:</strong> Pilih metode pembayaran yang Anda rencanakan (Transfer Bank, GoPay, OVO, dll). Ini hanya sebagai informasi untuk kami.</li>
+                                <li><strong>Kirim ke WhatsApp:</strong> Klik tombol "Lanjut ke WhatsApp". Anda akan otomatis diarahkan ke aplikasi WhatsApp dengan pesan yang sudah terisi rapi.</li>
+                                <li><strong>Tunggu Konfirmasi:</strong> Kirim pesan tersebut. Tim kami akan membalas pesan Anda untuk memberikan informasi rekening atau QRIS dan memproses pesanan Anda setelah pembayaran dikonfirmasi.</li>
+                                <li><strong>Produk Diterima:</strong> Setelah pembayaran dikonfirmasi, kami akan mengirimkan produk atau data panel Anda.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Alvian Store</h5>
+                    <p class="mb-3">Solusi lengkap untuk kebutuhan digital Anda. Panel Pterodactyl berkualitas tinggi, nomor virtual, dan bot WhatsApp profesional.</p>
+                    <div>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="footer-title">Menu</h5>
+                    <a href="#" class="footer-link" onclick="showPage('home')">Beranda</a>
+                    <a href="#" class="footer-link" onclick="showPage('products')">Produk</a>
+                    <a href="#" class="footer-link" onclick="showPage('services')">Layanan</a>
+                    <a href="#" class="footer-link" onclick="showPage('how-it-works')">Cara Kerja</a>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="footer-title">Produk</h5>
+                    <a href="#" class="footer-link">Panel Pterodactyl</a>
+                    <a href="#" class="footer-link">Nokos Indonesia</a>
+                    <a href="#" class="footer-link">Script Bot WhatsApp</a>
+                    <a href="#" class="footer-link">Jasa Bot Custom</a>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="footer-title">Kontak</h5>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i>+62 812-3456-789</p>
+                    <p class="mb-2"><i class="fas fa-envelope me-2"></i>info@alvianstore.com</p>
+                    <p class="mb-2"><i class="fab fa-whatsapp me-2"></i>+62 812-3456-789</p>
+                    <p class="mb-2"><i class="fab fa-telegram me-2"></i>@alvianadmin</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Alvian Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Konfirmasi Pemesanan</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h6>Detail Produk</h6>
+                        <div class="d-flex justify-content-between">
+                            <span id="modalProductName">-</span>
+                            <span id="modalProductPrice">-</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="panelDataFields" style="display:none;">
+                        <h6 class="mb-3">Data Panel Anda</h6>
+                        <div class="form-group mb-3">
+                            <label for="panelUsername">Username Panel</label>
+                            <input type="text" class="form-control" id="panelUsername" placeholder="Masukkan username yang Anda inginkan">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="panelPassword">Password Panel</label>
+                            <input type="password" class="form-control" id="panelPassword" placeholder="Masukkan password yang Anda inginkan">
+                        </div>
+                    </div>
+                    
+                    <h6 class="mb-3">Pilih Metode Pembayaran</h6>
+                    <div class="payment-methods">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="transferBank" value="Transfer Bank" checked>
+                            <label class="form-check-label" for="transferBank">
+                                <i class="fas fa-university me-2"></i>Transfer Bank
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="gopay" value="GoPay">
+                            <label class="form-check-label" for="gopay">
+                                <i class="fas fa-wallet me-2"></i>GoPay
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="ovo" value="OVO">
+                            <label class="form-check-label" for="ovo">
+                                <i class="fas fa-wallet me-2"></i>OVO
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="dana" value="Dana">
+                            <label class="form-check-label" for="dana">
+                                <i class="fas fa-wallet me-2"></i>Dana
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="qris" value="QRIS">
+                            <label class="form-check-label" for="qris">
+                                <i class="fas fa-qrcode me-2"></i>QRIS
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success" onclick="redirectToWhatsApp()">
+                        <i class="fab fa-whatsapp me-2"></i>Lanjut ke WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle me-2"></i>
+        <span id="notificationText">Notifikasi</span>
+    </div>
+
+    <!-- Link ke file JavaScript kita -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
