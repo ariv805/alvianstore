@@ -1,5 +1,5 @@
 // GANTI DENGAN NOMOR WHATSAPP ANDA
-const ADMIN_WHATSAPP_NUMBER = '628123456789'; 
+const ADMIN_WHATSAPP_NUMBER = '6285602095677'; 
 
 // DURASI WAKTU TUNGGU (dalam detik)
 const ORDER_COOLDOWN_SECONDS = 60; 
@@ -51,7 +51,7 @@ function startOrderCooldown() {
                 button.innerHTML = originalText;
             }
         });
-    }, ORDER_COOLDOWN_SECONDS * 1000); // 1000 milidetik = 1 detik
+    }, ORDER_COOLDOWN_SECONDS * 3600); // 1000 milidetik = 1 detik
 }
 
 
