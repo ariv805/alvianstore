@@ -1,5 +1,5 @@
 // GANTI DENGAN NOMOR WHATSAPP ANDA
-const ADMIN_WHATSAPP_NUMBER = '6285602095677'; 
+const ADMIN_WHATSAPP_NUMBER = '628123456789'; 
 
 // DURASI WAKTU TUNGGU (dalam detik) -> 60 MENIT = 3600 DETIK
 const ORDER_COOLDOWN_SECONDS = 3600; 
@@ -31,8 +31,8 @@ function saveOrderToLocalStorage(product, price, paymentMethod, panelData) {
     localStorage.setItem('alvianStoreOrders', JSON.stringify(orders));
 }
 
-// FUNGSI: Memulai timer cooldown
-function startOrderCooldown() {
+// FUNGSI UTAMA: Memulai timer cooldown
+function startOrderCooldown(duration = ORDER_COOLDOWN_SECONDS) {
     const orderButtons = document.querySelectorAll('.btn-order');
     
     // Nonaktifkan semua tombol dan ubah teksnya
@@ -41,7 +41,10 @@ function startOrderCooldown() {
         button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Mohon Tunggu...';
     });
 
-    // Set timer untuk mengaktifkan kembali tombol setelah beberapa detik
+    // Simpan waktu cooldown dimulai
+    localStorage.setItem('lastOrderTime', Date.now());
+
+    // Set timer untuk mengaktifkan kembali tombol
     setTimeout(() => {
         orderButtons.forEach(button => {
             button.disabled = false;
@@ -51,16 +54,29 @@ function startOrderCooldown() {
                 button.innerHTML = originalText;
             }
         });
-    }, ORDER_COOLDOWN_SECONDS * 1000); // 1000 milidetik = 1 detik
+        // Hapus waktu cooldown dari localStorage setelah selesai
+        localStorage.removeItem('lastOrderTime');
+    }, duration * 1000); // 1000 milidetik = 1 detik
+}
+
+// FUNGSI: Mengecek cooldown saat halaman dimuat
+function checkInitialCooldown() {
+    const lastOrderTime = localStorage.getItem('lastOrderTime');
+    if (lastOrderTime) {
+        const timePassed = (Date.now() - parseInt(lastOrderTime)) / 1000; // dalam detik
+        const remainingTime = ORDER_COOLDOWN_SECONDS - timePassed;
+
+        if (remainingTime > 0) {
+            // Jika masih dalam periode cooldown, mulai cooldown dengan sisa waktu
+            startOrderCooldown(remainingTime);
+        }
+    }
 }
 
 // FUNGSI: Mereset form di modal pemesanan
 function resetOrderModal() {
-    // Kosongkan input username dan password
     document.getElementById('panelUsername').value = '';
     document.getElementById('panelPassword').value = '';
-
-    // Kembalikan pilihan metode pembayaran ke default
     document.getElementById('transferBank').checked = true;
 }
 
@@ -69,16 +85,13 @@ function showOrderModal(button) {
     const product = button.getAttribute('data-product');
     const price = button.getAttribute('data-price');
 
-    // Simpan teks asli tombol jika belum disimpan
     if (!button.getAttribute('data-original-text')) {
         button.setAttribute('data-original-text', button.innerHTML);
     }
 
-    // Set product info in modal
     document.getElementById('modalProductName').textContent = product;
     document.getElementById('modalProductPrice').textContent = 'Rp ' + parseInt(price).toLocaleString('id-ID');
 
-    // Show/hide panel data fields
     const panelDataFields = document.getElementById('panelDataFields');
     if (product.toLowerCase().includes('panel')) {
         panelDataFields.style.display = 'block';
@@ -86,10 +99,8 @@ function showOrderModal(button) {
         panelDataFields.style.display = 'none';
     }
     
-    // Reset form setiap kali modal dibuka
     resetOrderModal();
 
-    // Show modal
     const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
     orderModal.show();
 }
@@ -102,40 +113,36 @@ function processOrder() {
     
     let panelData = null;
 
-    // Validasi data panel jika produknya adalah panel
     if (product.toLowerCase().includes('panel')) {
         const username = document.getElementById('panelUsername').value;
         const password = document.getElementById('panelPassword').value;
 
         if (!username || !password) {
             showNotification('Mohon isi username dan password panel!');
-            return; // Hentikan proses jika data belum lengkap
+            return;
         }
         
-        // Simpan data panel ke variabel
         panelData = { username, password };
     }
 
-    // 1. Simpan pesanan ke localStorage
+    // Simpan pesanan ke localStorage
     saveOrderToLocalStorage(product, price, paymentMethod, panelData);
 
-    // 2. Tutup modal pemesanan
+    // Tutup modal pemesanan
     const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
     orderModal.hide();
 
-    // 3. Tampilkan modal sukses
+    // Tampilkan modal sukses
     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
     successModal.show();
 
-    // 4. Tunggu 3 detik, lalu redirect dan mulai cooldown
+    // Mulai cooldown SEBELUM redirect
+    startOrderCooldown();
+
+    // Tunggu 3 detik, lalu redirect
     setTimeout(() => {
-        // Tutup modal sukses
         successModal.hide();
 
-        // Mulai cooldown untuk mencegah spam
-        startOrderCooldown();
-
-        // Buat pesan WhatsApp
         let message = `Halo Kak, saya ingin membeli produk berikut:\n\n`;
         message += `*Produk:* ${product}\n`;
         message += `*Harga:* ${price}\n`;
@@ -149,10 +156,7 @@ function processOrder() {
         message += `\nSaya akan membayar melalui: *${paymentMethod}*\n`;
         message += `\nMohon info rekening atau QRIS untuk pembayaran. Terima kasih!`;
 
-        // Encode pesan untuk URL
         const encodedMessage = encodeURIComponent(message);
-
-        // Buat URL WhatsApp dan redirect
         const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodedMessage}`;
         window.location.href = whatsappURL;
 
@@ -175,4 +179,6 @@ function showNotification(messageText) {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     showPage('home');
+    // PENTING: Panggil fungsi untuk mengecek cooldown awal
+    checkInitialCooldown();
 });
