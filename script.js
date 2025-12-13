@@ -12,6 +12,17 @@ function showPage(pageId) {
     });
     
     document.getElementById(pageId).classList.add('active');
+
+    // --- TAMBAHKAN BARIS INI ---
+    // Untuk menutup navbar di mobile setelah link diklik
+    const navbarNav = document.getElementById('navbarNav');
+    if (navbarNav) {
+        const bsCollapse = new bootstrap.Collapse(navbarNav, {
+            toggle: false
+        });
+        bsCollapse.hide();
+    }
+    // --- SELESAI ---
 }
 
 // FUNGSI: Menyimpan pesanan ke localStorage
