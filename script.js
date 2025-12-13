@@ -159,7 +159,9 @@ function processOrder() {
         
         panelData = { username, password };
     }
-
+    message += `\nSaya akan membayar melalui: *${paymentMethod}*\n`;
+        message += `\nMohon info rekening atau QRIS untuk pembayaran. Terima kasih!`;
+    
     // --- PERBAIKAN KRUSIAL ---
     // Simpan pesanan ke localStorage menggunakan harga MENTAH
     saveOrderToLocalStorage(product, priceRaw, paymentMethod, panelData);
