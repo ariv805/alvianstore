@@ -128,27 +128,41 @@ function showOrderModal(button) {
 }
 
 // FUNGSI UTAMA: Dipanggil saat tombol "Lanjut ke WhatsApp" diklik
+// FUNGSI UTAMA: Dipanggil saat tombol "Lanjut ke WhatsApp" diklik
 function processOrder() {
     const product = document.getElementById('modalProductName').textContent;
-    const price = document.getElementById('modalProductPrice').textContent;
+    
+    // --- PERBAIKAN KRUSIAL ---
+    // Ambil harga mentah yang sudah kita simpan di atribut modal
+    const priceRaw = document.getElementById('orderModal').getAttribute('data-current-price-raw');
     const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
     
+    let message = `Halo Kak, saya ingin membeli produk berikut:\n\n`;
+    message += `*Produk:* ${product}\n`;
+    // Gunakan harga mentah untuk format pesan WhatsApp
+    message += `*Harga:* Rp ${parseInt(priceRaw).toLocaleString('id-ID')}\n`;
+
     let panelData = null;
 
+    // Validasi data panel jika produknya adalah panel
     if (product.toLowerCase().includes('panel')) {
         const username = document.getElementById('panelUsername').value;
         const password = document.getElementById('panelPassword').value;
 
         if (!username || !password) {
             showNotification('Mohon isi username dan password panel!');
-            return;
+            return; // Hentikan proses jika data belum lengkap
         }
+        message += `\n*Data Panel:*\n`;
+        message += `Username: ${username}\n`;
+        message += `Password: ${password}\n`;
         
         panelData = { username, password };
     }
 
-    // Simpan pesanan ke localStorage
-    saveOrderToLocalStorage(product, price, paymentMethod, panelData);
+    // --- PERBAIKAN KRUSIAL ---
+    // Simpan pesanan ke localStorage menggunakan harga MENTAH
+    saveOrderToLocalStorage(product, priceRaw, paymentMethod, panelData);
 
     // Tutup modal pemesanan
     const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
@@ -158,25 +172,10 @@ function processOrder() {
     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
     successModal.show();
 
-    // Mulai cooldown SEBELUM redirect
-    startOrderCooldown();
-
-    // Tunggu 3 detik, lalu redirect
+    // Tunggu 3 detik, lalu redirect dan mulai cooldown
     setTimeout(() => {
         successModal.hide();
-
-        let message = `Halo Kak, saya ingin membeli produk berikut:\n\n`;
-        message += `*Produk:* ${product}\n`;
-        message += `*Harga:* ${price}\n`;
-        
-        if (panelData) {
-            message += `\n*Data Panel:*\n`;
-            message += `Username: ${panelData.username}\n`;
-            message += `Password: ${panelData.password}\n`;
-        }
-
-        message += `\nSaya akan membayar melalui: *${paymentMethod}*\n`;
-        message += `\nMohon info rekening atau QRIS untuk pembayaran. Terima kasih!`;
+        startOrderCooldown();
 
         const encodedMessage = encodeURIComponent(message);
         const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodedMessage}`;
