@@ -94,15 +94,24 @@ function resetOrderModal() {
 // Show Order Modal
 function showOrderModal(button) {
     const product = button.getAttribute('data-product');
-    const price = button.getAttribute('data-price');
+    const priceRaw = button.getAttribute('data-price'); // Harga mentah (ex: "1000")
 
+    // Simpan teks asli tombol jika belum disimpan
     if (!button.getAttribute('data-original-text')) {
         button.setAttribute('data-original-text', button.innerHTML);
     }
 
+    // Set product info in modal
     document.getElementById('modalProductName').textContent = product;
-    document.getElementById('modalProductPrice').textContent = 'Rp ' + parseInt(price).toLocaleString('id-ID');
+    // Tampilkan harga yang sudah diformat
+    document.getElementById('modalProductPrice').textContent = 'Rp ' + parseInt(priceRaw).toLocaleString('id-ID');
 
+    // --- PERBAIKAN KRUSIAL ---
+    // Simpan harga mentah sebagai atribut di modal agar bisa diambil lagi nanti
+    const orderModal = document.getElementById('orderModal');
+    orderModal.setAttribute('data-current-price-raw', priceRaw);
+
+    // Show/hide panel data fields
     const panelDataFields = document.getElementById('panelDataFields');
     if (product.toLowerCase().includes('panel')) {
         panelDataFields.style.display = 'block';
@@ -110,10 +119,12 @@ function showOrderModal(button) {
         panelDataFields.style.display = 'none';
     }
     
+    // Reset form setiap kali modal dibuka
     resetOrderModal();
 
-    const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-    orderModal.show();
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('orderModal'));
+    modal.show();
 }
 
 // FUNGSI UTAMA: Dipanggil saat tombol "Lanjut ke WhatsApp" diklik
