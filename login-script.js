@@ -1,5 +1,5 @@
 // GANTI PASSWORD ADMIN DI SINI
-const ADMIN_CREDENTIALS = { username: 'admin', password: 'admin123' };
+const ADMIN_CREDENTIALS = { username: 'alvian.store', password: 'alvianstore2010' };
 
 // Fungsi untuk login
 function handleLogin(event) {
