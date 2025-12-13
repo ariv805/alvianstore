@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Alvian Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+
+    <!-- Dashboard Screen (Langsung Muncul) -->
+    <div id="dashboardScreen" class="full-screen">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            <!-- Tab Navigasi -->
+            <ul class="nav nav-tabs" id="adminTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">Pesanan</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="testimonials-tab" data-bs-toggle="tab" data-bs-target="#testimonials" type="button" role="tab">Testimoni</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="adminTabContent">
+                <!-- TAB 1: PESANAN -->
+                <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                    <!-- Stats Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="stat-card text-center">
+                                <i class="fas fa-shopping-cart stat-icon text-primary"></i>
+                                <div class="stat-value" id="totalSales">0</div>
+                                <div class="stat-label">Total Penjualan</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card text-center">
+                                <i class="fas fa-money-bill-wave stat-icon text-success"></i>
+                                <div class="stat-value" id="totalRevenue">Rp 0</div>
+                                <div class="stat-label">Total Pendapatan</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card text-center position-relative">
+                                <i class="fas fa-clock stat-icon text-warning"></i>
+                                <div class="stat-value" id="pendingOrders">0</div>
+                                <div class="stat-label">Pesanan Menunggu</div>
+                                <span id="pendingBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Table -->
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Daftar Pesanan</h5>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary" onclick="filterOrders('all')">Semua</button>
+                                <button class="btn btn-sm btn-outline-warning" onclick="filterOrders('pending')">Menunggu</button>
+                                <button class="btn btn-sm btn-outline-success" onclick="filterOrders('success')">Selesai</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Pesanan</th>
+                                            <th>Produk</th>
+                                            <th>Harga</th>
+                                            <th>Metode</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ordersTableBody">
+                                        <!-- Baris pesanan akan dimuat di sini -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: TESTIMONI -->
+                <div class="tab-pane fade" id="testimonials" role="tabpanel">
+                    <div class="row">
+                        <!-- Form Tambah Testimoni -->
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Tambah Testimoni Baru</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="testimonialForm">
+                                        <div class="mb-3">
+                                            <label for="testimonialName" class="form-label">Nama Pelanggan</label>
+                                            <input type="text" class="form-control" id="testimonialName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="testimonialText" class="form-label">Isi Testimoni</label>
+                                            <textarea class="form-control" id="testimonialText" rows="4" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="testimonialImageUrl" class="form-label">URL Foto Pelanggan</label>
+                                            <input type="url" class="form-control" id="testimonialImageUrl" placeholder="https://..." required>
+                                            <small class="form-text text-muted">Upload foto ke layanan seperti Imgur, lalu tempel linknya di sini.</small>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-plus me-2"></i>Tambah Testimoni
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Daftar Testimoni yang Ada -->
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Daftar Testimoni</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="testimonialsList">
+                                        <!-- Testimoni akan dimuat di sini -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detail Pesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID:</strong> <span id="detailId"></span></p>
+                    <p><strong>Produk:</strong> <span id="detailProduct"></span></p>
+                    <p><strong>Harga:</strong> <span id="detailPrice"></span></p>
+                    <p><strong>Metode Pembayaran:</strong> <span id="detailPayment"></span></p>
+                    <div id="detailPanelData" style="display:none;">
+                        <hr>
+                        <h6>Data Panel:</h6>
+                        <p><strong>Username:</strong> <span id="detailUsername"></span></p>
+                        <p><strong>Password:</strong> <span id="detailPassword"></span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>
